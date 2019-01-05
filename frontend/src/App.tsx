@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactPlayer from "react-player";
 import "./App.css";
 import logo from "./logo.svg";
 
@@ -7,7 +8,13 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <ReactPlayer
+            url="http://yourtune.jedthompson.co.uk/hls/test.m3u8"
+            playing={true}
+            controls={true}
+            width={1280}
+            height={720}
+          />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
