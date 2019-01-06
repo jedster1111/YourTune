@@ -10,14 +10,20 @@ router.get("/", (ctx, next) => {
   ctx.body = "Hello World! This is the home page";
 });
 
-router.get("/test", (ctx, next) => {
-  ctx.body = "Hello, this is a test page";
+router.get("/publish-auth", (ctx, next) => {
+  const key: string = ctx.request.query.key;
+  ctx.body = `This is your key: ${key}`;
+
+  const username = "jedster1111";
+
+  ctx.response.status = 300;
+  ctx.set("Location", `/${username}`);
 });
 
 app.use(async (ctx, next) => {
   await next();
   const responseTime = ctx.response.get("X-Response-Time");
-  console.log(`${ctx.method} ${ctx.url} - ${responseTime}`);
+  console.log(`${ctx.method} ${ctx.url} - ${responseTime} - ${ctx.status}`);
 });
 
 app.use(async (ctx, next) => {
