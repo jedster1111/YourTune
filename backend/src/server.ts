@@ -1,23 +1,29 @@
 import Koa from "koa";
 import Router from "koa-router";
+import { getUserById } from "./data";
 
 const app = new Koa();
 const router = new Router();
 
 const PORT = 8000;
 
-router.get("/", (ctx, next) => {
-  ctx.body = "Hello World! This is the home page";
-});
+router.post("/", (ctx, next) => {
+  console.log(ctx.query);
 
-router.get("/publish-auth", (ctx, next) => {
-  const key: string = ctx.request.query.key;
-  ctx.body = `This is your key: ${key}`;
+  const secretKey: string | undefined = ctx.query.pageUrl;
 
-  const username = "jedster1111";
+  if (!secretKey) {
+    throw new Error("No secret key found in request!");
+  }
 
-  ctx.response.status = 300;
-  ctx.set("Location", `/${username}`);
+  const userData = getUserById(secretKey);
+
+  if (!userData) {
+    throw new Error("No user with the provided secret key was found!");
+  }
+
+  ctx.set("Location", userData.username);
+  ctx.status = 302; // Not sure if this is the right code to use in this case
 });
 
 app.use(async (ctx, next) => {
@@ -35,6 +41,6 @@ app.use(async (ctx, next) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(PORT);
+export const server = app.listen(PORT);
 
 console.log(`Server is listening on port ${PORT}`);
