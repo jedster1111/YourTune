@@ -13,6 +13,11 @@ export const data: Data = {
     id: 1,
     secretKey: "jedkey",
     username: "jedster1111"
+  },
+  mumkey: {
+    id: 2,
+    secretKey: "mumkey",
+    username: "mum"
   }
 };
 
