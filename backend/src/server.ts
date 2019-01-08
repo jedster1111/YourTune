@@ -8,7 +8,7 @@ const router = new Router();
 
 const PORT = 8000;
 
-router.post("/", (ctx, next) => {
+router.post("/on_publish", (ctx, next) => {
   console.log(ctx.body);
 
   const secretKey: string | undefined = ctx.request.body.name;

@@ -9,14 +9,14 @@ afterEach(() => {
 });
 
 it("should return a 500 error with no query params", async () => {
-  const response = await request(server).post("/");
+  const response = await request(server).post("/on_publish");
 
   expect(response.status).toBe(500);
 });
 
 it("should return a 302 when there is correct pageUrl redirect", async () => {
   const response = await request(server)
-    .post("/")
+    .post("/on_publish")
     .send({ [RequestArguments.name]: secretKey });
 
   expect(response.status).toBe(302);
