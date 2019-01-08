@@ -1,3 +1,4 @@
 export enum RequestArguments {
-  pageUrl = "pageUrl"
+  pageUrl = "pgeUrl",
+  name = "name"
 }

@@ -8,10 +8,10 @@ const router = new Router();
 
 const PORT = 8000;
 
-router.post("/", (ctx, next) => {
+router.get("/", (ctx, next) => {
   console.log(ctx.query);
 
-  const secretKey: string | undefined = ctx.request.body.pageUrl;
+  const secretKey: string | undefined = ctx.request.query.name;
 
   if (!secretKey) {
     throw new Error("No secret key found in request!");
