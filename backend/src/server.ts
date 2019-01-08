@@ -46,3 +46,7 @@ app.use(router.routes()).use(router.allowedMethods());
 export const server = app.listen(PORT);
 
 console.log(`Server is listening on port ${PORT}`);
+
+process.on("SIGINT", () => {
+  process.exit();
+});
