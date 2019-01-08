@@ -1,4 +1,5 @@
 import Koa from "koa";
+import bodyParser from "koa-bodyparser";
 import Router from "koa-router";
 import { getUserById } from "./data";
 
@@ -10,7 +11,7 @@ const PORT = 8000;
 router.post("/", (ctx, next) => {
   console.log(ctx.query);
 
-  const secretKey: string | undefined = ctx.query.pageUrl;
+  const secretKey: string | undefined = ctx.request.body.pageUrl;
 
   if (!secretKey) {
     throw new Error("No secret key found in request!");
@@ -25,6 +26,8 @@ router.post("/", (ctx, next) => {
   ctx.set("Location", userData.username);
   ctx.status = 302; // Not sure if this is the right code to use in this case
 });
+
+app.use(bodyParser());
 
 app.use(async (ctx, next) => {
   await next();
