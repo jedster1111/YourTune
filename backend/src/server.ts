@@ -8,10 +8,10 @@ const router = new Router();
 
 const PORT = 8000;
 
-router.get("/", (ctx, next) => {
-  console.log(ctx.query);
+router.post("/", (ctx, next) => {
+  console.log(ctx.body);
 
-  const secretKey: string | undefined = ctx.request.query.name;
+  const secretKey: string | undefined = ctx.request.body.name;
 
   if (!secretKey) {
     throw new Error("No secret key found in request!");
@@ -23,8 +23,7 @@ router.get("/", (ctx, next) => {
     throw new Error("No user with the provided secret key was found!");
   }
 
-  ctx.set("Location", userData.username);
-  ctx.status = 302; // Not sure if this is the right code to use in this case
+  ctx.redirect(userData.username); // Not sure if this is the right code to use in this case
 });
 
 app.use(bodyParser());
