@@ -9,8 +9,8 @@ const router = new Router();
 
 const PORT = 8000;
 
-router.get("/on_publish", (ctx, next) => {
-  const secretKey: string | undefined = ctx.request.query.name;
+router.post("/on_publish", (ctx, next) => {
+  const secretKey: string | undefined = ctx.request.body.name;
 
   if (!secretKey) {
     throw new Error("No secret key found in request!");
