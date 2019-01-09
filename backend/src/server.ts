@@ -1,5 +1,6 @@
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
+import logger from "koa-pino-logger";
 import Router from "koa-router";
 import { getUserById } from "./data";
 
@@ -9,8 +10,6 @@ const router = new Router();
 const PORT = 8000;
 
 router.get("/on_publish", (ctx, next) => {
-  console.log(ctx.body);
-
   const secretKey: string | undefined = ctx.request.query.name;
 
   if (!secretKey) {
@@ -26,20 +25,8 @@ router.get("/on_publish", (ctx, next) => {
   ctx.redirect(userData.username); // Not sure if this is the right code to use in this case
 });
 
+app.use(logger());
 app.use(bodyParser());
-
-app.use(async (ctx, next) => {
-  await next();
-  const responseTime = ctx.response.get("X-Response-Time");
-  console.log(`${ctx.method} ${ctx.url} - ${responseTime} - ${ctx.status}`);
-});
-
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set("X-Response-Time", `${ms}ms`);
-});
 
 app.use(router.routes()).use(router.allowedMethods());
 
