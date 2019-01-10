@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <ReactPlayer
-            url="http://yourtune.jedthompson.co.uk/live/jedster1111/index.m3u8"
+            url="http://yourtune.jedthompson.co.uk/live/jedster1111.m3u8"
             playing={true}
             controls={true}
             width={1280}
