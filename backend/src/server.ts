@@ -14,11 +14,15 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 
 const DB_PORT_INT = DB_PORT ? parseInt(DB_PORT, 10) : undefined; // Workaround for typeorm's port typing
 
+if (!DB_PASSWORD) {
+  console.log("No password for postgres db was provided!");
+}
+
 createConnection({
   type: "postgres",
   host: DB_HOST || "localhost",
   port: DB_PORT_INT || 3306,
-  username: DB_USERNAME,
+  username: DB_USERNAME || "postgres",
   password: DB_PASSWORD,
   database: DB_DATABASE || "postgres",
   entities: [User],
