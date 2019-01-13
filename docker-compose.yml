@@ -16,6 +16,8 @@ services:
   auth-server:
     image: jedster1111/yourtune
     restart: always
+    depends_on:
+      - db
     environment:
       - DB_HOST
       - DB_PORT
