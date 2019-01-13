@@ -2,7 +2,7 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import logger from "koa-pino-logger";
 
-import "reflect-metadata"; // Needed to get working TypeORM
+import "reflect-metadata"; // Needed to get TypeORM working
 import { createConnection } from "typeorm";
 import { User } from "./entity/User";
 import { rootRouter } from "./router/rootRouter";
