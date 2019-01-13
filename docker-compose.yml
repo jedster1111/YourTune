@@ -5,13 +5,13 @@ services:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_DB="${DB_DATABASE}"
-      - POSTGRES_PASSWORD="${DB_PASSWORD}"
+      - "POSTGRES_DB=${DB_DATABASE}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
     ports:
-      - "127.0.0.1:5432:5432"
-      
+      - "127.0.0.1:${DB_PORT}:${DB_PORT}"
+
   auth-server:
     image: jedster1111/yourtune
     restart: always
