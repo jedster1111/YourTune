@@ -17,20 +17,22 @@ export async function getUserBySecretKey(
   return user;
 }
 
+export async function getUserByName(
+  userRepo: Repository<User>,
+  username: string
+): Promise<User | undefined> {
+  const user = await userRepo.findOne({ username });
+  return user;
+}
+
 export async function setUserLiveStatus(
   userRepo: Repository<User>,
   userId: number,
   newStatus: "Live" | "Offline"
-): Promise<User> {
-  const userData = await getUserById(userRepo, userId);
+) {
+  // userData.isLive = newStatus === "Live" ? true : false;
 
-  if (!userData) {
-    throw new Error("Couldn't find that user!");
-  }
-
-  userData.isLive = newStatus === "Live" ? true : false;
-
-  return userData;
+  userRepo.update(userId, { isLive: newStatus === "Live" ? true : false });
 }
 
 export async function addUser(
