@@ -8,7 +8,7 @@ export class User {
   @Column()
   username!: string;
 
-  @Column()
+  @Column({ select: false })
   secretKey!: string;
 
   @Column()

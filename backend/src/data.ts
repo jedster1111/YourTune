@@ -13,7 +13,12 @@ export async function getUserBySecretKey(
   userRepo: Repository<User>,
   secretKey: string
 ): Promise<User | undefined> {
-  const user = await userRepo.findOne({ secretKey });
+  const user = await userRepo
+    .createQueryBuilder("user")
+    .addSelect("user.secretKey", "secretKey")
+    .where("user.secretKey = :secretKey", { secretKey })
+    .getOne();
+
   return user;
 }
 
