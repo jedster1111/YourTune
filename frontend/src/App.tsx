@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import ReactPlayer from "react-player";
 import "./App.css";
-import logo from "./logo.svg";
+import ResponsivePlayer from "./components/ResponsivePlayer";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <ReactPlayer
-            url="http://yourtune.jedthompson.co.uk/live/jedster1111.m3u8"
-            playing={true}
-            controls={true}
-            width={1280}
-            height={720}
-          />
+          <ResponsivePlayer url="http://yourtune.jedthompson.co.uk/live/mum.m3u8" />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>

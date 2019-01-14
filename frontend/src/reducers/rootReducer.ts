@@ -1,13 +1,13 @@
 import { Action, Reducer } from "redux";
 import { ChannelData } from "../types";
 
-enum ChannelsActionsTypes {
+export enum ChannelsActionsTypes {
   getChannelsLoading = "GET_CHANNELS_LOADING",
   getChannelsSuccess = "GET_CHANNELS_SUCCESS",
   getChannelsError = "GET_CHANNELS_ERROR"
 }
 
-interface GetChannelsLoadingAction
+export interface GetChannelsLoadingAction
   extends Action<ChannelsActionsTypes.getChannelsLoading> {}
 
 interface GetChannelsSuccessAction
@@ -18,6 +18,30 @@ interface GetChannelsSuccessAction
 interface GetChannelsErrorAction
   extends Action<ChannelsActionsTypes.getChannelsError> {
   payload: { errorMessage: string };
+}
+
+export function createGetChannelsLoadingAction(): GetChannelsLoadingAction {
+  return {
+    type: ChannelsActionsTypes.getChannelsLoading
+  };
+}
+
+export function createGetChannelsSuccessAction(
+  channels: ChannelData[]
+): GetChannelsSuccessAction {
+  return {
+    type: ChannelsActionsTypes.getChannelsSuccess,
+    payload: { channels }
+  };
+}
+
+export function createGetChannelsErrorAction(
+  errorMessage: string
+): GetChannelsErrorAction {
+  return {
+    type: ChannelsActionsTypes.getChannelsError,
+    payload: { errorMessage }
+  };
 }
 
 type ChannelsActions =
