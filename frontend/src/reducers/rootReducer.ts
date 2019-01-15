@@ -4,7 +4,7 @@ import channelsReducer, { ChannelsState } from "./channelsReducer";
 
 export type AllActions = ChannelsActions;
 
-interface RootState {
+export interface RootState {
   channelsState: ChannelsState;
 }
 

@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import styled from "styled-components";
 
 interface ResponsivePlayerProps {
-  url: string;
+  channelName: string;
 }
 
 const ResponsivePlayerWrapper = styled.div`
@@ -23,7 +23,9 @@ class ResponsivePlayer extends Component<ResponsivePlayerProps> {
     return (
       <ResponsivePlayerWrapper>
         <StyledReactPlayer
-          url={this.props.url}
+          url={`http://yourtune.jedthompson.co.uk/live/${
+            this.props.channelName
+          }.m3u8`}
           width="100%"
           height="100%"
           playing={true}

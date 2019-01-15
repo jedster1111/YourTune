@@ -1,10 +1,50 @@
-import React, { FC } from "react";
-import { RouteComponentProps } from "react-router";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Route, RouteComponentProps } from "react-router";
+import { createGetChannelsLoadingAction } from "./actions/channelsActions";
+import ChannelsList from "./components/ChannelsList/ChannelsListContainer";
+import ResponsivePlayer from "./components/ResponsivePlayer/ResponsivePlayer";
 
-interface AppProps extends RouteComponentProps {}
+interface AppOwnProps extends RouteComponentProps {}
 
-const App: FC<AppProps> = props => {
-  return <h1>Hello</h1>;
+interface DispatchProps {
+  dispatchGetChannels: typeof createGetChannelsLoadingAction;
+}
+
+type AppProps = AppOwnProps & DispatchProps;
+
+const mapDispatchToProps: DispatchProps = {
+  dispatchGetChannels: createGetChannelsLoadingAction
 };
 
-export default App;
+class App extends Component<AppProps> {
+  componentDidMount() {
+    this.props.dispatchGetChannels();
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello</h1>
+        <ChannelsList />
+        <Route
+          path="/:channelName"
+          exact
+          render={(props: RouteComponentProps<{ channelName: string }>) => {
+            const channelName = props.match.params.channelName;
+            return (
+              <ResponsivePlayer channelName={channelName} key={channelName} />
+            );
+          }}
+        />
+      </div>
+    );
+  }
+}
+
+const ConnectedApp = connect(
+  null,
+  mapDispatchToProps
+)(App);
+
+export default ConnectedApp;
