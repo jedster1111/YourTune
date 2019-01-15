@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension/logOnlyInProduction";
 import createSagaMiddleware from "redux-saga";
 import App from "./App";
-import "./index.css";
 import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import * as serviceWorker from "./serviceWorker";
@@ -20,7 +20,9 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route path="/" component={App} />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

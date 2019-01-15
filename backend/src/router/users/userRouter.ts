@@ -7,5 +7,5 @@ export const usersRouter = new Router({ prefix: "/users" });
 usersRouter.get("/", async (ctx, next) => {
   const users = await getRepository(User).find();
 
-  ctx.body = { users };
+  ctx.body = { channels: users };
 });

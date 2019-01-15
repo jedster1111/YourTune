@@ -1,12 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import * as api from "../api/api";
 import {
   ChannelsActionsTypes,
   createGetChannelsErrorAction,
   createGetChannelsSuccessAction,
   GetChannelsLoadingAction
-} from "../reducers/rootReducer";
+} from "../actions/channelsActions";
+import * as api from "../api/api";
 
 function* getChannelsSaga(action: GetChannelsLoadingAction) {
   try {

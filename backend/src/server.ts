@@ -45,6 +45,14 @@ const PORT = 8000;
 
 app.use(logger());
 app.use(bodyParser());
+app.use(async (ctx, next) => {
+  ctx.set("Access-Control-Allow-Origin", "*");
+  ctx.set(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  await next();
+});
 
 app.use(rootRouter());
 
