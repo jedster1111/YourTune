@@ -18,8 +18,8 @@ function mapStateToProps(state: RootState): StateProps {
 
 class ChannelsListContainer extends Component<ChannelsListProps> {
   render() {
+    console.log(this.props.channels);
     return <ChannelsList channels={this.props.channels} />;
-    // return <div>test</div>;
   }
 }
 
