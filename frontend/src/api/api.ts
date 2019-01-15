@@ -6,5 +6,7 @@ export interface GetChannelsReturn {
 }
 
 export async function getChannels() {
-  return axios.get<GetChannelsReturn>("http://localhost:8000/users");
+  return axios.get<GetChannelsReturn>(
+    "http://yourtune.jedthompson.co.uk/api/users"
+  );
 }
