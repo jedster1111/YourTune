@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Route, RouteComponentProps } from "react-router";
+import { Route, RouteComponentProps, Switch } from "react-router";
 import { createGetChannelsLoadingAction } from "./actions/channelsActions";
-import ChannelsList from "./components/ChannelsList/ChannelsListContainer";
-import ResponsivePlayer from "./components/ResponsivePlayer/ResponsivePlayer";
+import ChannelsPages from "./pages/ChannelsPage";
+import HomePage from "./pages/HomePage";
 
 interface AppOwnProps extends RouteComponentProps {}
 
@@ -25,18 +25,10 @@ class App extends Component<AppProps> {
   render() {
     return (
       <div>
-        <h1>Hello</h1>
-        <ChannelsList />
-        <Route
-          path="/:channelName"
-          exact
-          render={(props: RouteComponentProps<{ channelName: string }>) => {
-            const channelName = props.match.params.channelName;
-            return (
-              <ResponsivePlayer channelName={channelName} key={channelName} />
-            );
-          }}
-        />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/channels" component={ChannelsPages} />
+        </Switch>
       </div>
     );
   }

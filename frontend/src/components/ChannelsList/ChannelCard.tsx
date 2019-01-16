@@ -1,30 +1,36 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { ChannelData } from "../../types";
 import LiveIndicator from "./LiveIndicator";
 
-interface ChannelCardProps {
+interface ChannelCardProps extends RouteComponentProps {
   channelData: ChannelData;
+  isActiveChannel: boolean;
 }
 
-const StyledLi = styled.li`
+const StyledLi = styled.li<{ isActiveChannel: boolean }>`
   background-color: #a9bcd0;
-  border: solid lightgrey 1px;
+  border: ${({ isActiveChannel }) =>
+    `solid ${isActiveChannel ? "black" : "lightgrey"} 1px`};
 
   margin: 3px 0;
   padding: 9px 6px;
 `;
 
-const ChannelCard: FC<ChannelCardProps> = props => (
-  <StyledLi>
-    <Link to={`/${props.channelData.username}`}>
+const ChannelCard: FC<ChannelCardProps> = ({
+  channelData,
+  isActiveChannel,
+  match
+}) => (
+  <StyledLi isActiveChannel={isActiveChannel}>
+    <Link to={`/channels/${channelData.username}`}>
       <div>
-        <span>{props.channelData.username}</span>
-        <LiveIndicator isLive={props.channelData.isLive} />
+        <span>{channelData.username}</span>
+        <LiveIndicator isLive={channelData.isLive} />
       </div>
     </Link>
   </StyledLi>
 );
 
-export default ChannelCard;
+export default withRouter(ChannelCard);

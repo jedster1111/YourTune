@@ -5,6 +5,7 @@ import ChannelCard from "./ChannelCard";
 
 interface ChannelsListProps {
   channels: ChannelData[];
+  activeChannelName: string | undefined;
 }
 
 const StyledUl = styled.ul`
@@ -19,12 +20,40 @@ const StyledUl = styled.ul`
   width: 200px;
 `;
 
-const ChannelsList: FC<ChannelsListProps> = props => (
-  <StyledUl>
-    {props.channels.map(channelData => (
-      <ChannelCard channelData={channelData} key={channelData.id} />
-    ))}
-  </StyledUl>
-);
+const ChannelsList: FC<ChannelsListProps> = props => {
+  const indexOfActiveChannel = getIndexOfChannelName(
+    props.channels,
+    props.activeChannelName
+  );
+  return (
+    <StyledUl>
+      {props.channels.map((channelData, index) => {
+        const isActiveChannel = indexOfActiveChannel === index;
+        return (
+          <ChannelCard
+            channelData={channelData}
+            key={channelData.id}
+            isActiveChannel={isActiveChannel}
+          />
+        );
+      })}
+    </StyledUl>
+  );
+};
 
 export default ChannelsList;
+
+export function getIndexOfChannelName(
+  channels: ChannelData[],
+  channelName: string | undefined
+): number | undefined {
+  const index = channels.findIndex(
+    channelData => channelData.username === channelName
+  );
+
+  if (index === -1) {
+    return undefined;
+  }
+
+  return index;
+}

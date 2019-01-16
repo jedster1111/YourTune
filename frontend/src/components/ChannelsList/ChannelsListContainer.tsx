@@ -8,7 +8,11 @@ interface StateProps {
   channels: ChannelData[];
 }
 
-type ChannelsListProps = StateProps;
+interface OwnProps {
+  activeChannel: string | undefined;
+}
+
+type ChannelsListProps = StateProps & OwnProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
@@ -18,8 +22,12 @@ function mapStateToProps(state: RootState): StateProps {
 
 class ChannelsListContainer extends Component<ChannelsListProps> {
   render() {
-    console.log(this.props.channels);
-    return <ChannelsList channels={this.props.channels} />;
+    return (
+      <ChannelsList
+        channels={this.props.channels}
+        activeChannelName={this.props.activeChannel}
+      />
+    );
   }
 }
 
