@@ -1,28 +1,34 @@
+import { ConnectedRouter, routerMiddleware } from "connected-react-router";
+import { createBrowserHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension/logOnlyInProduction";
 import createSagaMiddleware from "redux-saga";
 import App from "./App";
-import rootReducer from "./reducers/rootReducer";
+import createRootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 import * as serviceWorker from "./serviceWorker";
 
+export const history = createBrowserHistory();
+
 const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = composeWithDevTools(applyMiddleware(sagaMiddleware));
+const composeEnhancers = composeWithDevTools(
+  applyMiddleware(routerMiddleware(history), sagaMiddleware)
+);
 
-const store = createStore(rootReducer, composeEnhancers);
+const store = createStore(createRootReducer(history), composeEnhancers);
 
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <Route path="/" component={App} />
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

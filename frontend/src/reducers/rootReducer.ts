@@ -1,21 +1,25 @@
-import { combineReducers } from "redux";
+import {
+  connectRouter,
+  LocationChangeAction,
+  RouterState
+} from "connected-react-router";
+import { History } from "history";
+import { combineReducers, Reducer } from "redux";
 import { ChannelsActions } from "../actions/channelsActions";
 import channelsReducer, { ChannelsState } from "./channelsReducer";
 
-export type AllActions = ChannelsActions;
+export type AllActions = ChannelsActions & LocationChangeAction;
 
 export interface RootState {
+  router: RouterState;
   channelsState: ChannelsState;
 }
 
-// function createInitialState(): RootState {
-//   return {
-//     channelsState: createChannelsInitialState()
-//   };
-// }
+function createRootReducer(history: History): Reducer<RootState, AllActions> {
+  return combineReducers({
+    router: connectRouter(history),
+    channelsState: channelsReducer
+  });
+}
 
-const rootReducer = combineReducers<RootState>({
-  channelsState: channelsReducer
-});
-
-export default rootReducer;
+export default createRootReducer;

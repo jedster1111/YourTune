@@ -1,6 +1,8 @@
-import { ChannelsActionsTypes } from "../actions/channelsActions";
+import {
+  ChannelsActions,
+  ChannelsActionsTypes
+} from "../actions/channelsActions";
 import { ChannelData } from "../types";
-import { AllActions } from "./rootReducer";
 
 export interface ChannelsState {
   channels: ChannelData[];
@@ -14,7 +16,7 @@ export function createChannelsInitialState(): ChannelsState {
 
 function channelsReducer(
   state = createChannelsInitialState(),
-  action: AllActions
+  action: ChannelsActions
 ): ChannelsState {
   switch (action.type) {
     case ChannelsActionsTypes.getChannelsLoading: {
