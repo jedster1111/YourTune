@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, MapStateToProps } from "react-redux";
 import { Route, RouteComponentProps, Switch } from "react-router";
+import styled from "styled-components";
 import { createGetChannelsLoadingAction } from "./actions/channelsActions";
+import ConnectedChannelslist from "./components/ChannelsList/ChannelsListContainer";
 import ChannelsPages from "./pages/ChannelsPage";
 import HomePage from "./pages/HomePage";
 
@@ -17,19 +19,25 @@ const mapDispatchToProps: DispatchProps = {
   dispatchGetChannels: createGetChannelsLoadingAction
 };
 
+const PageWrapper = styled.div`
+  display: flex;
+`;
+
 class App extends Component<AppProps> {
   componentDidMount() {
     this.props.dispatchGetChannels();
   }
 
   render() {
+    const activeChannel = this.props.location.pathname.substr(1);
     return (
-      <div>
+      <PageWrapper>
+        <ConnectedChannelslist activeChannel={activeChannel} />
         <Switch>
           <Route path="/" exact component={HomePage} />
-          <Route path="/channels" component={ChannelsPages} />
+          <Route path="/:channelName" exact component={ChannelsPages} />
         </Switch>
-      </div>
+      </PageWrapper>
     );
   }
 }

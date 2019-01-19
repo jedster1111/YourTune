@@ -6,6 +6,7 @@ import ChannelsList from "./ChannelsList";
 
 interface StateProps {
   channels: ChannelData[];
+  location: string;
 }
 
 interface OwnProps {
@@ -16,7 +17,8 @@ type ChannelsListProps = StateProps & OwnProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    channels: state.channelsState.channels
+    channels: state.channelsState.channels,
+    location: state.router.location.pathname
   };
 }
 

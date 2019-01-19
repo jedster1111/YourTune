@@ -24,7 +24,7 @@ const ChannelCard: FC<ChannelCardProps> = ({
   match
 }) => (
   <StyledLi isActiveChannel={isActiveChannel}>
-    <Link to={`/channels/${channelData.username}`}>
+    <Link to={`/${channelData.username}`}>
       <div>
         <span>{channelData.username}</span>
         <LiveIndicator isLive={channelData.isLive} />
