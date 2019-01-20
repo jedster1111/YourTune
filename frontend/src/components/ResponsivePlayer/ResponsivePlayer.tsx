@@ -50,8 +50,8 @@ class ResponsivePlayer extends Component<ResponsivePlayerProps> {
             height="100%"
             playing={true}
             autoPlay
-            muted
-            controls={false}
+            // muted
+            controls
             config={{
               file: {
                 hlsOptions: {
