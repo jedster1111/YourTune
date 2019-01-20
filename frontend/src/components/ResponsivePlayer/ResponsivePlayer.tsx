@@ -50,7 +50,7 @@ class ResponsivePlayer extends Component<ResponsivePlayerProps> {
             height="100%"
             playing={true}
             autoPlay
-            // muted
+            muted
             controls
             config={{
               file: {
@@ -58,7 +58,7 @@ class ResponsivePlayer extends Component<ResponsivePlayerProps> {
                   liveBackBufferLength: 0,
                   liveSyncDuration: 3,
                   liveMaxLatencyDuration: 9,
-                  // debug: true
+                  // debug: true,
                   // initialLiveManifestSize
                   startPosition: -1
                 }
