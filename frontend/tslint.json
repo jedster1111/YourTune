@@ -11,7 +11,7 @@
     "no-empty-interface": false,
     "member-access": false,
     "object-literal-sort-keys": false,
-    "semicolon": true
+    "semicolon": [true, "always", "ignore-bound-class-methods"]
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

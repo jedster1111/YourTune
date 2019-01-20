@@ -15,7 +15,19 @@ const StyledLi = styled.li<{ isActiveChannel: boolean }>`
     `solid ${isActiveChannel ? "black" : "lightgrey"} 1px`};
 
   margin: 3px 0;
-  padding: 9px 6px;
+  padding: 0 6px;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  height: 75px;
+  padding: 0 15px;
+
+  color: black;
+  text-decoration: none;
 `;
 
 const ChannelCard: FC<ChannelCardProps> = ({
@@ -24,12 +36,10 @@ const ChannelCard: FC<ChannelCardProps> = ({
   match
 }) => (
   <StyledLi isActiveChannel={isActiveChannel}>
-    <Link to={`/${channelData.username}`}>
-      <div>
-        <span>{channelData.username}</span>
-        <LiveIndicator isLive={channelData.isLive} />
-      </div>
-    </Link>
+    <StyledLink to={`/${channelData.username}`}>
+      <span>{channelData.username}</span>
+      <LiveIndicator isLive={channelData.isLive} />
+    </StyledLink>
   </StyledLi>
 );
 

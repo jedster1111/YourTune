@@ -8,14 +8,9 @@ interface ChannelsListProps {
   activeChannelName: string | undefined;
 }
 
-const ChannelsListWrapper = styled.div`
-  flex: 1;
-  max-width: 200px;
-`;
-
 const StyledUl = styled.ul`
   list-style-type: none;
-  margin: 4px 0;
+  margin: 0;
   padding: 5px 8px;
 
   background-color: #d8dbe2;
@@ -29,20 +24,18 @@ const ChannelsList: FC<ChannelsListProps> = props => {
     props.activeChannelName
   );
   return (
-    <ChannelsListWrapper>
-      <StyledUl>
-        {props.channels.map((channelData, index) => {
-          const isActiveChannel = indexOfActiveChannel === index;
-          return (
-            <ChannelCard
-              channelData={channelData}
-              key={channelData.id}
-              isActiveChannel={isActiveChannel}
-            />
-          );
-        })}
-      </StyledUl>
-    </ChannelsListWrapper>
+    <StyledUl>
+      {props.channels.map((channelData, index) => {
+        const isActiveChannel = indexOfActiveChannel === index;
+        return (
+          <ChannelCard
+            channelData={channelData}
+            key={channelData.id}
+            isActiveChannel={isActiveChannel}
+          />
+        );
+      })}
+    </StyledUl>
   );
 };
 
