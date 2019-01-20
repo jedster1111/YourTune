@@ -56,11 +56,11 @@ class ResponsivePlayer extends Component<ResponsivePlayerProps> {
               file: {
                 hlsOptions: {
                   liveBackBufferLength: 0,
-                  liveSyncDurationCount: 3,
-                  liveMaxLatencyDurationCount: 6
+                  liveSyncDuration: 3,
+                  liveMaxLatencyDuration: 9,
                   // debug: true
                   // initialLiveManifestSize
-                  // startPosition: -1
+                  startPosition: -1
                 }
               }
             }}
