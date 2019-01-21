@@ -11,7 +11,6 @@ interface DispatchProps {
 
 interface StateProps {
   channels: ChannelData[];
-  location: string;
 }
 
 interface OwnProps {
@@ -26,8 +25,7 @@ const mapDispatchToProps: DispatchProps = {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    channels: state.channelsState.channels,
-    location: state.router.location.pathname
+    channels: state.channelsState.channels
   };
 }
 

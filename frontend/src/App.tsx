@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router";
 import styled from "styled-components";
 import ConnectedChannelslist from "./components/ChannelsList/ChannelsListContainer";
+import NavBar from "./components/NavBar/NavBar";
+import {
+  getActiveChannelFromUrl,
+  getChannelUrl,
+  urls
+} from "./helpers/urls/urls";
+import ChannelPage from "./pages/ChannelsPage";
 import HomePage from "./pages/HomePage";
 import VideoPage from "./pages/VideoPage";
 
@@ -29,19 +36,27 @@ const MainContent = styled.div`
 
 class App extends Component<AppProps> {
   render() {
-    const activeChannel = this.props.location.pathname.substr(1);
+    const activeChannel = getActiveChannelFromUrl(this.props.location.pathname);
     return (
-      <PageWrapper>
-        <Sidebar>
-          <ConnectedChannelslist activeChannel={activeChannel} />
-        </Sidebar>
-        <MainContent>
-          <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/:channelName" exact component={VideoPage} />
-          </Switch>
-        </MainContent>
-      </PageWrapper>
+      <div>
+        <NavBar />
+        <PageWrapper>
+          <Sidebar>
+            <ConnectedChannelslist activeChannel={activeChannel} />
+          </Sidebar>
+          <MainContent>
+            <Switch>
+              <Route path={urls.home} exact component={HomePage} />
+              <Route path={urls.channels} component={ChannelPage} />
+              <Route
+                path={getChannelUrl(":channelName")}
+                exact
+                component={VideoPage}
+              />
+            </Switch>
+          </MainContent>
+        </PageWrapper>
+      </div>
     );
   }
 }

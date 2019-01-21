@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { getChannelUrl } from "../../helpers/urls/urls";
 import { ChannelData } from "../../types";
 import LiveIndicator from "./LiveIndicator";
 
@@ -36,7 +37,7 @@ const ChannelCard: FC<ChannelCardProps> = ({
   match
 }) => (
   <StyledLi isActiveChannel={isActiveChannel}>
-    <StyledLink to={`/${channelData.username}`}>
+    <StyledLink to={getChannelUrl(channelData.username)}>
       <span>{channelData.username}</span>
       <LiveIndicator isLive={channelData.isLive} />
     </StyledLink>
