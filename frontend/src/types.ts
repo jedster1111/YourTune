@@ -3,3 +3,8 @@ export interface ChannelData {
   username: string;
   isLive: boolean;
 }
+
+export interface UserData {
+  id: number;
+  username: string;
+}

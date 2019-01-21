@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router";
 import styled from "styled-components";
-import ConnectedChannelslist from "./components/ChannelsList/ChannelsListContainer";
+import ConnectedChannelsList from "./components/ChannelsList/ChannelsListContainer";
 import NavBar from "./components/NavBar/NavBar";
 import {
   getActiveChannelFromUrl,
@@ -42,7 +42,7 @@ class App extends Component<AppProps> {
         <NavBar />
         <PageWrapper>
           <Sidebar>
-            <ConnectedChannelslist activeChannel={activeChannel} />
+            <ConnectedChannelsList activeChannel={activeChannel} />
           </Sidebar>
           <MainContent>
             <Switch>

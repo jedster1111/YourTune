@@ -14,7 +14,7 @@ export function createChannelsInitialState(): ChannelsState {
   return { channels: [], isLoading: false, errorMessage: null };
 }
 
-function channelsReducer(
+export function channelsReducer(
   state = createChannelsInitialState(),
   action: ChannelsActions
 ): ChannelsState {
@@ -46,5 +46,3 @@ function channelsReducer(
       return state;
   }
 }
-
-export default channelsReducer;

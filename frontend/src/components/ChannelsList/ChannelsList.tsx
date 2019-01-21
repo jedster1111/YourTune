@@ -25,18 +25,20 @@ const ChannelsList: FC<ChannelsListProps> = props => {
     props.activeChannelName
   );
   return (
-    <StyledUl>
-      {props.channels.map((channelData, index) => {
-        const isActiveChannel = indexOfActiveChannel === index;
-        return (
-          <ChannelCard
-            channelData={channelData}
-            key={channelData.id}
-            isActiveChannel={isActiveChannel}
-          />
-        );
-      })}
-    </StyledUl>
+    <div>
+      <StyledUl>
+        {props.channels.map((channelData, index) => {
+          const isActiveChannel = indexOfActiveChannel === index;
+          return (
+            <ChannelCard
+              channelData={channelData}
+              key={channelData.id}
+              isActiveChannel={isActiveChannel}
+            />
+          );
+        })}
+      </StyledUl>
+    </div>
   );
 };
 

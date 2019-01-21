@@ -2,10 +2,9 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { urls } from "../../helpers/urls/urls";
+import ConnectedAuthButton from "../AuthButton/AuthButtonContainer";
 
-interface NavBarProps {
-  username?: string;
-}
+interface NavBarProps {}
 
 const StyledNavBar = styled.nav`
   box-sizing: border-box;
@@ -15,14 +14,14 @@ const StyledNavBar = styled.nav`
   margin-bottom: 8px;
 `;
 
-const StyledUl = styled.ul`
+const Ul = styled.ul`
   display: flex;
   list-style-type: none;
   margin: 0;
   padding: 5px 3px;
 `;
 
-const StyledLi = styled.li`
+const Li = styled.li`
   margin: 0 8px;
   border: solid 1px black;
   width: 70px;
@@ -39,19 +38,27 @@ const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: black;
+  text-decoration: none;
 `;
 
-const NavBar: FC<NavBarProps> = props => (
-  <StyledNavBar>
-    <StyledUl>
-      <StyledLi>
-        <StyledLink to={urls.home}>Home</StyledLink>
-      </StyledLi>
-      <StyledLi>
-        <StyledLink to={urls.channels}>Channels</StyledLink>
-      </StyledLi>
-    </StyledUl>
-  </StyledNavBar>
-);
+const NavBar: FC<NavBarProps> = props => {
+  return (
+    <StyledNavBar>
+      <Ul>
+        <Li>
+          <StyledLink to={urls.home}>Home</StyledLink>
+        </Li>
+        <Li>
+          <StyledLink to={urls.channels}>Channels</StyledLink>
+        </Li>
+        <Li>
+          <ConnectedAuthButton />
+        </Li>
+      </Ul>
+    </StyledNavBar>
+  );
+};
 
 export default NavBar;

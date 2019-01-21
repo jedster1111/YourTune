@@ -16,7 +16,7 @@ const StyledLi = styled.li<{ isActiveChannel: boolean }>`
     `solid ${isActiveChannel ? "black" : "lightgrey"} 1px`};
 
   margin: 3px 0;
-  padding: 0 6px;
+  padding: 0;
 `;
 
 const StyledLink = styled(Link)`

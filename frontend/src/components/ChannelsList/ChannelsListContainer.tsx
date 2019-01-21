@@ -44,9 +44,9 @@ class ChannelsListContainer extends Component<ChannelsListProps> {
   }
 }
 
-const ConnectedChannelslist = connect(
+const ConnectedChannelsList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ChannelsListContainer);
 
-export default ConnectedChannelslist;
+export default ConnectedChannelsList;
