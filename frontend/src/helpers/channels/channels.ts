@@ -19,3 +19,18 @@ export function createChannelsDataFromNames(
     createChannelData(index + 1, username, false)
   );
 }
+
+export function getIndexOfChannelName(
+  channels: ChannelData[],
+  channelName: string | undefined
+): number | undefined {
+  const index = channels.findIndex(
+    channelData => channelData.username === channelName
+  );
+
+  if (index === -1) {
+    return undefined;
+  }
+
+  return index;
+}

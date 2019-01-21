@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { getIndexOfChannelName } from "../../helpers/channels/channels";
 import { ChannelData } from "../../types";
 import ChannelCard from "./ChannelCard";
 
@@ -40,18 +41,3 @@ const ChannelsList: FC<ChannelsListProps> = props => {
 };
 
 export default ChannelsList;
-
-export function getIndexOfChannelName(
-  channels: ChannelData[],
-  channelName: string | undefined
-): number | undefined {
-  const index = channels.findIndex(
-    channelData => channelData.username === channelName
-  );
-
-  if (index === -1) {
-    return undefined;
-  }
-
-  return index;
-}

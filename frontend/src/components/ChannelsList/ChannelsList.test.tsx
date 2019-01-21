@@ -1,5 +1,7 @@
-import { createChannelsDataFromNames } from "../../helpers/channels/channels";
-import { getIndexOfChannelName } from "./ChannelsList";
+import {
+  createChannelsDataFromNames,
+  getIndexOfChannelName
+} from "../../helpers/channels/channels";
 
 describe("Testing getIndexOfChannelName", () => {
   const channels = createChannelsDataFromNames(["a", "b", "c", "d", "e"]);
