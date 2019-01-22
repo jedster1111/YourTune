@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { createSetIsLoginFormShowingAction } from "../../actions/loginFormActions";
 import { RootState } from "../../reducers/rootReducer";
 import { AuthButton } from "./AuthButton";
 
@@ -7,11 +8,11 @@ interface StateProps {
   isLoggedIn: boolean;
 }
 
-// interface DispatchProps {
-//   dispatch
-// }
+interface DispatchProps {
+  setIsShowingLoginForm: typeof createSetIsLoginFormShowingAction;
+}
 
-type AuthButtonContainerProps = StateProps;
+type AuthButtonContainerProps = StateProps & DispatchProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
@@ -19,8 +20,12 @@ function mapStateToProps(state: RootState): StateProps {
   };
 }
 
+const mapDispatchToProps: DispatchProps = {
+  setIsShowingLoginForm: createSetIsLoginFormShowingAction
+};
+
 class AuthButtonContainer extends Component<AuthButtonContainerProps> {
-  handleLoginClick = () => console.log("Login Click");
+  handleLoginClick = () => this.props.setIsShowingLoginForm(true);
   handleLogoutClick = () => console.log("Logout Click");
 
   render() {
@@ -34,6 +39,9 @@ class AuthButtonContainer extends Component<AuthButtonContainerProps> {
   }
 }
 
-const ConnectedAuthButton = connect(mapStateToProps)(AuthButtonContainer);
+const ConnectedAuthButton = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthButtonContainer);
 
 export default ConnectedAuthButton;

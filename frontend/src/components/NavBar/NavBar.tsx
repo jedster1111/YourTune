@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { urls } from "../../helpers/urls/urls";
-import ConnectedAuthButton from "../AuthButton/AuthButtonContainer";
+import ConnectedAuthButton from "../AuthButton/ConnectedAuthButton";
 
 interface NavBarProps {}
 
