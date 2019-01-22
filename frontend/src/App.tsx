@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router";
 import styled from "styled-components";
 import ConnectedChannelsList from "./components/ChannelsList/ChannelsListContainer";
+import ConnectedLoginForm from "./components/LoginForm/ConnectedLoginForm";
 import NavBar from "./components/NavBar/NavBar";
 import {
   getActiveChannelFromUrl,
@@ -45,6 +46,7 @@ class App extends Component<AppProps> {
             <ConnectedChannelsList activeChannel={activeChannel} />
           </Sidebar>
           <MainContent>
+            <ConnectedLoginForm />
             <Switch>
               <Route path={urls.home} exact component={HomePage} />
               <Route path={urls.channels} component={ChannelPage} />
