@@ -6,6 +6,7 @@ import { AuthButton } from "./AuthButton";
 
 interface StateProps {
   isLoggedIn: boolean;
+  isLoginFormShowing: boolean;
 }
 
 interface DispatchProps {
@@ -16,7 +17,8 @@ type AuthButtonContainerProps = StateProps & DispatchProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    isLoggedIn: !!state.userState.data
+    isLoggedIn: !!state.userState.data,
+    isLoginFormShowing: state.loginFormState.isLoginFormShowing
   };
 }
 
@@ -32,6 +34,7 @@ class AuthButtonContainer extends Component<AuthButtonContainerProps> {
     return (
       <AuthButton
         isLoggedIn={this.props.isLoggedIn}
+        isLogginFormShowing={this.props.isLoginFormShowing}
         handleLoginClick={this.handleLoginClick}
         handleLogoutClick={this.handleLogoutClick}
       />

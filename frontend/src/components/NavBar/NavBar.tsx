@@ -7,6 +7,7 @@ import ConnectedAuthButton from "../AuthButton/ConnectedAuthButton";
 interface NavBarProps {}
 
 const StyledNavBar = styled.nav`
+  position: static;
   box-sizing: border-box;
   width: 100%;
   border: solid 1px black;
