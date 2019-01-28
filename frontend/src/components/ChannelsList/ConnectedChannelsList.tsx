@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { createGetChannelsLoadingAction } from "../../actions/channelsActions";
 import { RootState } from "../../reducers/rootReducer";
 import { channelsDataSelector } from "../../selectors/baseSelectors";
+import { activeChannelSelector } from "../../selectors/combinedSelectors";
 import { ChannelData } from "../../types";
 import ChannelsList from "./ChannelsList";
 
@@ -12,13 +13,10 @@ interface DispatchProps {
 
 interface StateProps {
   channels: ChannelData[];
-}
-
-interface OwnProps {
   activeChannel: string | undefined;
 }
 
-type ChannelsListProps = StateProps & OwnProps & DispatchProps;
+type ChannelsListProps = StateProps & DispatchProps;
 
 const mapDispatchToProps: DispatchProps = {
   dispatchGetChannels: createGetChannelsLoadingAction
@@ -26,7 +24,8 @@ const mapDispatchToProps: DispatchProps = {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    channels: channelsDataSelector(state)
+    channels: channelsDataSelector(state),
+    activeChannel: activeChannelSelector(state)
   };
 }
 

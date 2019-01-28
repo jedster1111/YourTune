@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../reducers/rootReducer";
 import { isLoggedInSelector } from "../../selectors/combinedSelectors";
@@ -16,7 +16,10 @@ function mapStateToProps(state: RootState): StateProps {
   };
 }
 
-class NavBarContainer extends Component<NavBarContainerProps> {
+class NavBarContainer extends PureComponent<NavBarContainerProps> {
+  componentDidUpdate() {
+    console.log("navbar updated");
+  }
   render() {
     return <NavBar isLoggedIn={this.props.isLoggedIn} />;
   }

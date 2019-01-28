@@ -24,3 +24,7 @@ export function isLoginFormShowingSelector(state: RootState): boolean {
 export function loginFormValuesSelector(state: RootState): LoginFormValues {
   return state.loginFormState.values;
 }
+
+export function urlSelector(state: RootState): string {
+  return state.router.location.pathname;
+}

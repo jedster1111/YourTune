@@ -1,4 +1,4 @@
-import React, { Component, FormEvent } from "react";
+import React, { FormEvent, PureComponent } from "react";
 import { connect } from "react-redux";
 import { Key } from "ts-key-enum";
 import {
@@ -41,7 +41,7 @@ const mapDispatchToProps: DispatchProps = {
   setIsShowingLoginForm: createSetIsLoginFormShowingAction
 };
 
-class LoginFormContainer extends Component<
+class LoginFormContainer extends PureComponent<
   LoginFormContainerProps,
   LoginFormContainerState
 > {

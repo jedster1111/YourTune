@@ -1,20 +1,14 @@
-import React, { Component } from "react";
-import { Route, RouteComponentProps, Switch } from "react-router";
+import React, { PureComponent } from "react";
+import { Route, Switch } from "react-router";
 import styled from "styled-components";
 import ConnectedChannelsList from "./components/ChannelsList/ConnectedChannelsList";
 import ConnectedNavBar from "./components/NavBar/ConnectedNavBar";
-import {
-  getActiveChannelFromUrl,
-  getChannelUrl,
-  urls
-} from "./helpers/urls/urls";
+import { getChannelUrl, urls } from "./helpers/urls/urls";
 import ChannelPage from "./pages/ChannelsPage";
 import HomePage from "./pages/HomePage";
 import VideoPage from "./pages/VideoPage";
 
-interface AppOwnProps extends RouteComponentProps {}
-
-type AppProps = AppOwnProps;
+interface AppProps {}
 
 const PageWrapper = styled.div`
   display: flex;
@@ -34,15 +28,17 @@ const MainContent = styled.div`
   border: solid 1px black;
 `;
 
-class App extends Component<AppProps> {
+class App extends PureComponent<AppProps> {
+  componentDidUpdate() {
+    console.log("App updated");
+  }
   render() {
-    const activeChannel = getActiveChannelFromUrl(this.props.location.pathname);
     return (
       <div>
         <ConnectedNavBar />
         <PageWrapper>
           <Sidebar>
-            <ConnectedChannelsList activeChannel={activeChannel} />
+            <ConnectedChannelsList />
           </Sidebar>
           <MainContent>
             <Switch>

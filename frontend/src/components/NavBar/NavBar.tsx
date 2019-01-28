@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { urls } from "../../helpers/urls/urls";
@@ -78,4 +78,4 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
   );
 };
 
-export default NavBar;
+export default memo(NavBar);
