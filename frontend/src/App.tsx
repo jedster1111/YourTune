@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router";
 import styled from "styled-components";
-import ConnectedChannelsList from "./components/ChannelsList/ChannelsListContainer";
+import ConnectedChannelsList from "./components/ChannelsList/ConnectedChannelsList";
 import ConnectedNavBar from "./components/NavBar/ConnectedNavBar";
 import {
   getActiveChannelFromUrl,

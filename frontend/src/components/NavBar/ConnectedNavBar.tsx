@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { RootState } from "../../reducers/rootReducer";
+import { isLoggedInSelector } from "../../selectors/combinedSelectors";
 import NavBar from "./NavBar";
 
 type NavBarContainerProps = StateProps;
@@ -11,7 +12,7 @@ interface StateProps {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    isLoggedIn: !!state.userState.data
+    isLoggedIn: isLoggedInSelector(state)
   };
 }
 

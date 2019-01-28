@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createSetIsLoginFormShowingAction } from "../../actions/loginFormActions";
 import { RootState } from "../../reducers/rootReducer";
+import { isLoginFormShowingSelector } from "../../selectors/baseSelectors";
+import { isLoggedInSelector } from "../../selectors/combinedSelectors";
 import { AuthButton } from "./AuthButton";
 
 export type AuthButtonTypes = "login" | "signup" | "logout";
@@ -23,8 +25,8 @@ type AuthButtonContainerProps = StateProps & DispatchProps & OwnProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    isLoggedIn: !!state.userState.data,
-    isLoginFormShowing: state.loginFormState.isLoginFormShowing
+    isLoggedIn: isLoggedInSelector(state),
+    isLoginFormShowing: isLoginFormShowingSelector(state)
   };
 }
 

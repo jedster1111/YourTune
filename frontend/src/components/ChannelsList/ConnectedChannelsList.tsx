@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createGetChannelsLoadingAction } from "../../actions/channelsActions";
 import { RootState } from "../../reducers/rootReducer";
+import { channelsDataSelector } from "../../selectors/baseSelectors";
 import { ChannelData } from "../../types";
 import ChannelsList from "./ChannelsList";
 
@@ -25,7 +26,7 @@ const mapDispatchToProps: DispatchProps = {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    channels: state.channelsState.channels
+    channels: channelsDataSelector(state)
   };
 }
 

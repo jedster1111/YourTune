@@ -7,6 +7,10 @@ import {
 } from "../../actions/loginFormActions";
 import { LoginFormValues } from "../../reducers/loginFormReducer";
 import { RootState } from "../../reducers/rootReducer";
+import {
+  isLoginFormShowingSelector,
+  loginFormValuesSelector
+} from "../../selectors/baseSelectors";
 import LoginForm from "./LoginForm";
 
 interface StateProps {
@@ -27,8 +31,8 @@ interface LoginFormContainerState {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    values: state.loginFormState.values,
-    isLoginFormShowing: state.loginFormState.isLoginFormShowing
+    values: loginFormValuesSelector(state),
+    isLoginFormShowing: isLoginFormShowingSelector(state)
   };
 }
 
@@ -74,8 +78,8 @@ class LoginFormContainer extends Component<
           values={this.props.values}
           onChange={this.props.setLoginFormValue}
           onSubmit={(e: FormEvent<HTMLFormElement>) => {
-            console.log("Submitted");
             e.preventDefault();
+            console.log("Submitted");
           }}
           onMouseEnter={() => this.setState({ isMouseInForm: true })}
           onMouseLeave={() => this.setState({ isMouseInForm: false })}
