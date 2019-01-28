@@ -4,6 +4,8 @@ import { createSetIsLoginFormShowingAction } from "../../actions/loginFormAction
 import { RootState } from "../../reducers/rootReducer";
 import { AuthButton } from "./AuthButton";
 
+export type AuthButtonTypes = "login" | "signup" | "logout";
+
 interface StateProps {
   isLoggedIn: boolean;
   isLoginFormShowing: boolean;
@@ -13,7 +15,11 @@ interface DispatchProps {
   setIsShowingLoginForm: typeof createSetIsLoginFormShowingAction;
 }
 
-type AuthButtonContainerProps = StateProps & DispatchProps;
+interface OwnProps {
+  type: AuthButtonTypes;
+}
+
+type AuthButtonContainerProps = StateProps & DispatchProps & OwnProps;
 
 function mapStateToProps(state: RootState): StateProps {
   return {
@@ -27,16 +33,22 @@ const mapDispatchToProps: DispatchProps = {
 };
 
 class AuthButtonContainer extends Component<AuthButtonContainerProps> {
-  handleLoginClick = () => this.props.setIsShowingLoginForm(true);
+  handleLoginClick = () => {
+    if (!this.props.isLoginFormShowing) {
+      this.props.setIsShowingLoginForm(true);
+    }
+  };
   handleLogoutClick = () => console.log("Logout Click");
+  handleSignUpClick = () => console.log("Sign Up Clicked");
 
   render() {
     return (
       <AuthButton
+        type={this.props.type}
         isLoggedIn={this.props.isLoggedIn}
-        isLogginFormShowing={this.props.isLoginFormShowing}
         handleLoginClick={this.handleLoginClick}
         handleLogoutClick={this.handleLogoutClick}
+        handleSignUpClick={this.handleSignUpClick}
       />
     );
   }

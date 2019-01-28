@@ -1,35 +1,26 @@
 import React, { FC } from "react";
-import styled from "styled-components";
-import ConnectedLoginForm from "../LoginForm/ConnectedLoginForm";
-
-export const NavButton = styled.button`
-  width: 100%;
-  height: 100%;
-
-  background-color: white;
-
-  border: none;
-`;
+import { NavButton } from "../NavButton/NavButton";
+import { AuthButtonTypes } from "./ConnectedAuthButton";
 
 export interface AuthButtonProps {
   isLoggedIn: boolean;
-  isLogginFormShowing: boolean;
+  type: AuthButtonTypes;
   handleLoginClick: () => void;
   handleLogoutClick: () => void;
+  handleSignUpClick: () => void;
 }
 
 export const AuthButton: FC<AuthButtonProps> = ({
-  isLoggedIn,
-  isLogginFormShowing,
-  handleLoginClick: handleLogin,
-  handleLogoutClick: handleLogout
+  type,
+  handleLoginClick,
+  handleLogoutClick,
+  handleSignUpClick
 }) => {
-  return isLoggedIn ? (
-    <NavButton onClick={handleLogout}>Logout</NavButton>
+  return type === "login" ? (
+    <NavButton onClick={handleLoginClick}>Login</NavButton>
+  ) : type === "logout" ? (
+    <NavButton onClick={handleLogoutClick}>Logout</NavButton>
   ) : (
-    <NavButton onClick={handleLogin}>
-      <span>Login</span>
-      {isLogginFormShowing && <ConnectedLoginForm />}
-    </NavButton>
+    <NavButton onClick={handleSignUpClick}>Sign Up</NavButton>
   );
 };

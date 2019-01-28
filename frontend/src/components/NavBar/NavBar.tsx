@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { urls } from "../../helpers/urls/urls";
 import ConnectedAuthButton from "../AuthButton/ConnectedAuthButton";
+import ConnectedLoginForm from "../LoginForm/ConnectedLoginForm";
+import { NavButton } from "../NavButton/NavButton";
 
-interface NavBarProps {}
+interface NavBarProps {
+  isLoggedIn: boolean;
+}
 
 const StyledNavBar = styled.nav`
   position: static;
@@ -23,6 +27,8 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+  /* position: static; */
+
   margin: 0 8px;
   border: solid 1px black;
   width: 70px;
@@ -44,19 +50,29 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const NavBar: FC<NavBarProps> = props => {
+const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
   return (
     <StyledNavBar>
       <Ul>
         <Li>
-          <StyledLink to={urls.home}>Home</StyledLink>
+          <StyledLink to={urls.home} tabIndex={-1}>
+            <NavButton>Home</NavButton>
+          </StyledLink>
         </Li>
         <Li>
-          <StyledLink to={urls.channels}>Channels</StyledLink>
+          <StyledLink to={urls.channels} tabIndex={-1}>
+            <NavButton>Channels</NavButton>
+          </StyledLink>
         </Li>
         <Li>
-          <ConnectedAuthButton />
+          <ConnectedAuthButton type={isLoggedIn ? "logout" : "login"} />
+          <ConnectedLoginForm />
         </Li>
+        {!isLoggedIn && (
+          <Li>
+            <ConnectedAuthButton type="signup" />
+          </Li>
+        )}
       </Ul>
     </StyledNavBar>
   );

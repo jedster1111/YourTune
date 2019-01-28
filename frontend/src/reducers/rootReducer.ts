@@ -8,6 +8,7 @@ import { combineReducers, Reducer } from "redux";
 import { ChannelsActions } from "../actions/channelsActions";
 import { channelsReducer, ChannelsState } from "./channelsReducer";
 import { loginFormReducer, LoginFormState } from "./loginFormReducer";
+import { signUpFormReducer, SignUpFormState } from "./signUpFormReducer";
 import { userReducer, UserState } from "./userReducer";
 
 export type AllActions = ChannelsActions & LocationChangeAction;
@@ -17,6 +18,7 @@ export interface RootState {
   channelsState: ChannelsState;
   userState: UserState;
   loginFormState: LoginFormState;
+  signUpFormState: SignUpFormState;
 }
 
 function createRootReducer(history: History): Reducer<RootState, AllActions> {
@@ -24,7 +26,8 @@ function createRootReducer(history: History): Reducer<RootState, AllActions> {
     router: connectRouter(history),
     channelsState: channelsReducer,
     userState: userReducer,
-    loginFormState: loginFormReducer
+    loginFormState: loginFormReducer,
+    signUpFormState: signUpFormReducer
   });
 }
 

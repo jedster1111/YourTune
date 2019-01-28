@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router";
 import styled from "styled-components";
 import ConnectedChannelsList from "./components/ChannelsList/ChannelsListContainer";
-import NavBar from "./components/NavBar/NavBar";
+import ConnectedNavBar from "./components/NavBar/ConnectedNavBar";
 import {
   getActiveChannelFromUrl,
   getChannelUrl,
@@ -39,7 +39,7 @@ class App extends Component<AppProps> {
     const activeChannel = getActiveChannelFromUrl(this.props.location.pathname);
     return (
       <div>
-        <NavBar />
+        <ConnectedNavBar />
         <PageWrapper>
           <Sidebar>
             <ConnectedChannelsList activeChannel={activeChannel} />

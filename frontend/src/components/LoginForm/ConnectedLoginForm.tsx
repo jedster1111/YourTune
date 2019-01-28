@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, FormEvent } from "react";
 import { connect } from "react-redux";
 import { Key } from "ts-key-enum";
 import {
@@ -11,6 +11,7 @@ import LoginForm from "./LoginForm";
 
 interface StateProps {
   values: LoginFormValues;
+  isLoginFormShowing: boolean;
 }
 
 interface DispatchProps {
@@ -26,7 +27,8 @@ interface LoginFormContainerState {
 
 function mapStateToProps(state: RootState): StateProps {
   return {
-    values: state.loginFormState.values
+    values: state.loginFormState.values,
+    isLoginFormShowing: state.loginFormState.isLoginFormShowing
   };
 }
 
@@ -44,43 +46,41 @@ class LoginFormContainer extends Component<
   };
 
   handleMouseCloseLoginForm = (e: Event) => {
-    if (!this.state.isMouseInForm) {
+    if (this.props.isLoginFormShowing && !this.state.isMouseInForm) {
       this.props.setIsShowingLoginForm(false);
     }
   };
 
-  handleEscapeCloseLoginForm = (e: KeyboardEvent) => {
-    if (e.key === Key.Escape) {
+  handleKeyboardCloseLoginForm = (e: KeyboardEvent) => {
+    if (this.props.isLoginFormShowing && e.key === Key.Escape) {
       this.props.setIsShowingLoginForm(false);
     }
   };
 
   componentDidMount() {
-    window.addEventListener("mouseup", this.handleMouseCloseLoginForm, false);
-    window.addEventListener("keydown", this.handleEscapeCloseLoginForm, false);
+    window.addEventListener("mouseup", this.handleMouseCloseLoginForm);
+    window.addEventListener("keydown", this.handleKeyboardCloseLoginForm);
   }
 
   componentWillUnmount() {
-    window.removeEventListener(
-      "mouseup",
-      this.handleMouseCloseLoginForm,
-      false
-    );
-    window.removeEventListener(
-      "keydown",
-      this.handleEscapeCloseLoginForm,
-      false
-    );
+    window.removeEventListener("mouseup", this.handleMouseCloseLoginForm);
+    window.removeEventListener("keydown", this.handleKeyboardCloseLoginForm);
   }
 
   render() {
     return (
-      <LoginForm
-        values={this.props.values}
-        onChange={this.props.setLoginFormValue}
-        onMouseEnter={() => this.setState({ isMouseInForm: true })}
-        onMouseLeave={() => this.setState({ isMouseInForm: false })}
-      />
+      this.props.isLoginFormShowing && (
+        <LoginForm
+          values={this.props.values}
+          onChange={this.props.setLoginFormValue}
+          onSubmit={(e: FormEvent<HTMLFormElement>) => {
+            console.log("Submitted");
+            e.preventDefault();
+          }}
+          onMouseEnter={() => this.setState({ isMouseInForm: true })}
+          onMouseLeave={() => this.setState({ isMouseInForm: false })}
+        />
+      )
     );
   }
 }

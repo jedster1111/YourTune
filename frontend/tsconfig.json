@@ -21,7 +21,8 @@
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "strictPropertyInitialization": true
   },
   "include": [
     "src"
