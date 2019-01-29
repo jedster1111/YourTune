@@ -8,4 +8,6 @@ export const NavButton = styled.button`
   background-color: white;
 
   border: none;
+
+  font: inherit;
 `;

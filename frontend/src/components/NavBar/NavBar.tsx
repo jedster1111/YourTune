@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { urls } from "../../helpers/urls/urls";
 import ConnectedAuthButton from "../AuthButton/ConnectedAuthButton";
 import ConnectedLoginForm from "../LoginForm/ConnectedLoginForm";
-import { NavButton } from "../NavButton/NavButton";
 import ConnectedSignUpForm from "../SignUpForm/ConnectedSignUpForm";
 
 interface NavBarProps {
@@ -62,14 +61,10 @@ const NavBar: FC<NavBarProps> = ({
     <StyledNavBar>
       <Ul>
         <Li>
-          <StyledLink to={urls.home} tabIndex={-1}>
-            <NavButton>Home</NavButton>
-          </StyledLink>
+          <StyledLink to={urls.home}>Home</StyledLink>
         </Li>
         <Li>
-          <StyledLink to={urls.channels} tabIndex={-1}>
-            <NavButton>Channels</NavButton>
-          </StyledLink>
+          <StyledLink to={urls.channels}>Channels</StyledLink>
         </Li>
         <Li>
           <ConnectedAuthButton type={isLoggedIn ? "logout" : "login"} />
