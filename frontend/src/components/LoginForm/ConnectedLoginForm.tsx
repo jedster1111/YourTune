@@ -69,17 +69,15 @@ class LoginFormContainer extends PureComponent<LoginFormContainerProps> {
 
   render() {
     return (
-      this.props.isLoginFormShowing && (
-        <LoginForm
-          ref={this.formRef}
-          values={this.props.values}
-          onChange={this.props.setLoginFormValue}
-          onSubmit={(e: FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            console.log("Submitted");
-          }}
-        />
-      )
+      <LoginForm
+        ref={this.formRef}
+        values={this.props.values}
+        onChange={this.props.setLoginFormValue}
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          console.log("Submitted");
+        }}
+      />
     );
   }
 }

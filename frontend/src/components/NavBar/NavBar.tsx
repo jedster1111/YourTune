@@ -9,6 +9,8 @@ import ConnectedSignUpForm from "../SignUpForm/ConnectedSignUpForm";
 
 interface NavBarProps {
   isLoggedIn: boolean;
+  isLoginFormShowing: boolean;
+  isSignUpFormShowing: boolean;
 }
 
 const StyledNavBar = styled.nav`
@@ -51,7 +53,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
+const NavBar: FC<NavBarProps> = ({
+  isLoggedIn,
+  isLoginFormShowing,
+  isSignUpFormShowing
+}) => {
   return (
     <StyledNavBar>
       <Ul>
@@ -67,12 +73,12 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
         </Li>
         <Li>
           <ConnectedAuthButton type={isLoggedIn ? "logout" : "login"} />
-          <ConnectedLoginForm />
+          {isLoginFormShowing && <ConnectedLoginForm />}
         </Li>
         {!isLoggedIn && (
           <Li>
             <ConnectedAuthButton type="signup" />
-            <ConnectedSignUpForm />
+            {isSignUpFormShowing && <ConnectedSignUpForm />}
           </Li>
         )}
       </Ul>

@@ -68,19 +68,17 @@ class SignUpFormContainer extends PureComponent<SignUpFormContainerProps> {
   }
 
   render() {
-    const { isSignUpFormShowing, setSignUpFormValue, values } = this.props;
+    const { setSignUpFormValue, values } = this.props;
     return (
-      isSignUpFormShowing && (
-        <SignUpForm
-          ref={this.formRef}
-          values={values}
-          onChange={setSignUpFormValue}
-          onSubmit={(e: FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            console.log("Submitted");
-          }}
-        />
-      )
+      <SignUpForm
+        ref={this.formRef}
+        values={values}
+        onChange={setSignUpFormValue}
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          console.log("Submitted");
+        }}
+      />
     );
   }
 }
