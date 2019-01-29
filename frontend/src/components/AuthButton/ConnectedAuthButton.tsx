@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createSetIsLoginFormShowingAction } from "../../actions/loginFormActions";
+import { createSetIsSignUpFormShowingAction } from "../../actions/signupFormActions";
 import { RootState } from "../../reducers/rootReducer";
 import { isLoginFormShowingSelector } from "../../selectors/baseSelectors";
 import { isLoggedInSelector } from "../../selectors/combinedSelectors";
+import { isSignUpFormShowingSelector } from "../../selectors/signUpFormSelectors";
 import { AuthButton } from "./AuthButton";
 
 export type AuthButtonTypes = "login" | "signup" | "logout";
@@ -11,10 +13,12 @@ export type AuthButtonTypes = "login" | "signup" | "logout";
 interface StateProps {
   isLoggedIn: boolean;
   isLoginFormShowing: boolean;
+  isSignUpFormShowing: boolean;
 }
 
 interface DispatchProps {
   setIsShowingLoginForm: typeof createSetIsLoginFormShowingAction;
+  setIsShowingSignUpForm: typeof createSetIsSignUpFormShowingAction;
 }
 
 interface OwnProps {
@@ -26,22 +30,48 @@ type AuthButtonContainerProps = StateProps & DispatchProps & OwnProps;
 function mapStateToProps(state: RootState): StateProps {
   return {
     isLoggedIn: isLoggedInSelector(state),
-    isLoginFormShowing: isLoginFormShowingSelector(state)
+    isLoginFormShowing: isLoginFormShowingSelector(state),
+    isSignUpFormShowing: isSignUpFormShowingSelector(state)
   };
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setIsShowingLoginForm: createSetIsLoginFormShowingAction
+  setIsShowingLoginForm: createSetIsLoginFormShowingAction,
+  setIsShowingSignUpForm: createSetIsSignUpFormShowingAction
 };
 
 class AuthButtonContainer extends Component<AuthButtonContainerProps> {
   handleLoginClick = () => {
-    if (!this.props.isLoginFormShowing) {
-      this.props.setIsShowingLoginForm(true);
+    const {
+      isSignUpFormShowing,
+      setIsShowingSignUpForm,
+      isLoginFormShowing,
+      setIsShowingLoginForm
+    } = this.props;
+
+    if (isSignUpFormShowing) {
+      setIsShowingSignUpForm(false);
+    }
+    if (!isLoginFormShowing) {
+      setIsShowingLoginForm(true);
     }
   };
   handleLogoutClick = () => console.log("Logout Click");
-  handleSignUpClick = () => console.log("Sign Up Clicked");
+  handleSignUpClick = () => {
+    const {
+      isSignUpFormShowing,
+      setIsShowingSignUpForm,
+      isLoginFormShowing,
+      setIsShowingLoginForm
+    } = this.props;
+
+    if (isLoginFormShowing) {
+      setIsShowingLoginForm(false);
+    }
+    if (!isSignUpFormShowing) {
+      setIsShowingSignUpForm(true);
+    }
+  };
 
   render() {
     return (

@@ -7,7 +7,7 @@ export type SignUpFormActions =
 
 export enum SignUpFormActionsTypes {
   setIsSignUpFormShowing = "SET_IS_SIGN_UP_FORM_SHOWING",
-  setSignUpFormValue = "SET_LOGIN_FORM_VALUE"
+  setSignUpFormValue = "SET_SIGN_UP_FORM_VALUE"
 }
 
 export interface SetIsSignUpFormShowingAction

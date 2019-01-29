@@ -1,4 +1,4 @@
-import React, { FormEvent, PureComponent } from "react";
+import React, { createRef, FormEvent, PureComponent } from "react";
 import { connect } from "react-redux";
 import { Key } from "ts-key-enum";
 import {
@@ -20,14 +20,10 @@ interface StateProps {
 
 interface DispatchProps {
   setLoginFormValue: typeof createSetLoginFormValueAction;
-  setIsShowingLoginForm: typeof createSetIsLoginFormShowingAction;
+  setIsLoginFormShowing: typeof createSetIsLoginFormShowingAction;
 }
 
 type LoginFormContainerProps = StateProps & DispatchProps;
-
-interface LoginFormContainerState {
-  isMouseInForm: boolean;
-}
 
 function mapStateToProps(state: RootState): StateProps {
   return {
@@ -38,26 +34,26 @@ function mapStateToProps(state: RootState): StateProps {
 
 const mapDispatchToProps: DispatchProps = {
   setLoginFormValue: createSetLoginFormValueAction,
-  setIsShowingLoginForm: createSetIsLoginFormShowingAction
+  setIsLoginFormShowing: createSetIsLoginFormShowingAction
 };
 
-class LoginFormContainer extends PureComponent<
-  LoginFormContainerProps,
-  LoginFormContainerState
-> {
-  state = {
-    isMouseInForm: false
-  };
+class LoginFormContainer extends PureComponent<LoginFormContainerProps> {
+  formRef = createRef<HTMLFormElement>();
 
-  handleMouseCloseLoginForm = (e: Event) => {
-    if (this.props.isLoginFormShowing && !this.state.isMouseInForm) {
-      this.props.setIsShowingLoginForm(false);
+  handleMouseCloseLoginForm = (e: MouseEvent) => {
+    const formNode = this.formRef.current;
+    const { isLoginFormShowing, setIsLoginFormShowing } = this.props;
+    const isClickInsideForm =
+      formNode && formNode.contains(e.target as Node | null);
+
+    if (isLoginFormShowing && !isClickInsideForm) {
+      setIsLoginFormShowing(false);
     }
   };
 
   handleKeyboardCloseLoginForm = (e: KeyboardEvent) => {
     if (this.props.isLoginFormShowing && e.key === Key.Escape) {
-      this.props.setIsShowingLoginForm(false);
+      this.props.setIsLoginFormShowing(false);
     }
   };
 
@@ -75,14 +71,13 @@ class LoginFormContainer extends PureComponent<
     return (
       this.props.isLoginFormShowing && (
         <LoginForm
+          ref={this.formRef}
           values={this.props.values}
           onChange={this.props.setLoginFormValue}
           onSubmit={(e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             console.log("Submitted");
           }}
-          onMouseEnter={() => this.setState({ isMouseInForm: true })}
-          onMouseLeave={() => this.setState({ isMouseInForm: false })}
         />
       )
     );

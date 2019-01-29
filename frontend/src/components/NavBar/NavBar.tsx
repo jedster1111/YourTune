@@ -5,6 +5,7 @@ import { urls } from "../../helpers/urls/urls";
 import ConnectedAuthButton from "../AuthButton/ConnectedAuthButton";
 import ConnectedLoginForm from "../LoginForm/ConnectedLoginForm";
 import { NavButton } from "../NavButton/NavButton";
+import ConnectedSignUpForm from "../SignUpForm/ConnectedSignUpForm";
 
 interface NavBarProps {
   isLoggedIn: boolean;
@@ -71,6 +72,7 @@ const NavBar: FC<NavBarProps> = ({ isLoggedIn }) => {
         {!isLoggedIn && (
           <Li>
             <ConnectedAuthButton type="signup" />
+            <ConnectedSignUpForm />
           </Li>
         )}
       </Ul>
