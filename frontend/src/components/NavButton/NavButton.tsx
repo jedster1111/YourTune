@@ -10,4 +10,6 @@ export const NavButton = styled.button`
   border: none;
 
   font: inherit;
+
+  white-space: nowrap;
 `;
