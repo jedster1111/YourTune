@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec ./node_modules/.bin/ts-node --watch src src/server.ts",
     "start:prod": "node dist/server.js",
-    "test": "jest",
+    "test": "jest --runInBand",
     "build": "tsc"
   },
   "author": "",

@@ -4,9 +4,13 @@ import { Connection, createConnection } from "typeorm";
 import { LoggerOptions } from "typeorm/logger/LoggerOptions";
 import { User } from "../entity/User";
 
-export interface DbConfig {
+export interface TestDbConfig {
   synchronize?: boolean;
   logging?: LoggerOptions;
+}
+
+export function getTestDbConfig(): TestDbConfig {
+  return { logging: false, synchronize: true };
 }
 
 dotenv.config();
@@ -19,7 +23,7 @@ if (!DB_PASSWORD) {
 }
 
 export async function createDbConnection(
-  config?: DbConfig
+  config?: TestDbConfig
 ): Promise<Connection> {
   return await createConnection({
     type: "postgres",
@@ -29,7 +33,8 @@ export async function createDbConnection(
     password: DB_PASSWORD,
     database: DB_DATABASE || "postgres",
     entities: [User],
-    synchronize: (config && config.synchronize) || true,
+    synchronize:
+      config && config.synchronize !== undefined ? config.synchronize : true,
     dropSchema: true,
     logger: "advanced-console",
     logging: config && config.logging !== undefined ? config.logging : "all"

@@ -1,21 +1,22 @@
 import { Server } from "http";
 import request from "supertest";
 import { Connection } from "typeorm";
-import { app } from "./app";
-import { testSetup, testTearDown } from "./testUtils/testSetUpTearDown";
-import { RequestArguments } from "./types";
+import { app } from "../app";
+import { getTestDbConfig } from "../database/initDatabase";
+import { testSetup, testTearDown } from "../testUtils/testSetUpTearDown";
+import { RequestArguments } from "../types";
 
 const secretKey = "jedkey";
 
 let server: Server;
 let dbConnection: Connection;
 
-beforeAll(async done => {
-  ({ server, dbConnection } = await testSetup(app, { logging: false }));
+beforeEach(async done => {
+  ({ server, dbConnection } = await testSetup(app, getTestDbConfig()));
   done();
 });
 
-afterAll(async done => {
+afterEach(async done => {
   await testTearDown(server, dbConnection);
   done();
 });

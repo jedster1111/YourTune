@@ -2,18 +2,21 @@ import { Server } from "http";
 import request from "supertest";
 import { Connection } from "typeorm";
 import { app } from "../app";
+import { getTestDbConfig } from "../database/initDatabase";
 // import { testData } from "../testUtils/insertTestData";
 import { testSetup, testTearDown } from "../testUtils/testSetUpTearDown";
 
 let server: Server;
 let dbConnection: Connection;
 
-beforeAll(async () => {
-  ({ server, dbConnection } = await testSetup(app, { logging: false }));
+beforeEach(async done => {
+  ({ server, dbConnection } = await testSetup(app, getTestDbConfig()));
+  done();
 });
 
-afterAll(async () => {
+afterEach(async done => {
   await testTearDown(server, dbConnection);
+  done();
 });
 
 it("should return an array of users", async () => {
