@@ -37,7 +37,9 @@ export async function setUserLiveStatus(
 ) {
   // userData.isLive = newStatus === "Live" ? true : false;
 
-  userRepo.update(userId, { isLive: newStatus === "Live" ? true : false });
+  await userRepo.update(userId, {
+    isLive: newStatus === "Live" ? true : false
+  });
 }
 
 export async function addUser(

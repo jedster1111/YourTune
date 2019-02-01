@@ -2,6 +2,7 @@ import Router from "koa-router";
 import { getRepository } from "typeorm";
 import { getUserBySecretKey, setUserLiveStatus } from "../../data";
 import { User } from "../../entity/User";
+import { errorMessages } from "../../types";
 
 export const streamAuthRouter = new Router();
 
@@ -10,13 +11,13 @@ streamAuthRouter.post("/on_publish", async (ctx, next) => {
   const secretKey: string | undefined = ctx.request.body.name;
 
   if (!secretKey) {
-    throw new Error("No secret key found in request!");
+    throw new Error(errorMessages.noSecretKey);
   }
 
   const userData = await getUserBySecretKey(usersRepo, secretKey);
 
   if (!userData) {
-    throw new Error("No user with the provided secretkey was found!");
+    throw new Error(errorMessages.noUserFound);
   }
 
   await setUserLiveStatus(usersRepo, userData.id, "Live");
@@ -29,13 +30,13 @@ streamAuthRouter.post("/on_publish_done", async (ctx, next) => {
   const secretKey: string | undefined = ctx.request.body.name;
 
   if (!secretKey) {
-    throw new Error("No secret key found in request!");
+    throw new Error(errorMessages.noSecretKey);
   }
 
   const userData = await getUserBySecretKey(usersRepo, secretKey);
 
   if (!userData) {
-    throw new Error("No user with the provided secretkey was found!");
+    throw new Error(errorMessages.noUserFound);
   }
 
   await setUserLiveStatus(usersRepo, userData.id, "Offline");
