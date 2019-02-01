@@ -1,7 +1,10 @@
 import Router from "koa-router";
 import { getRepository } from "typeorm";
-import { getUserBySecretKey, setUserLiveStatus } from "../../data";
-import { User } from "../../entity/User";
+import { User } from "../../database/entity/User";
+import {
+  getUserBySecretKey,
+  setUserLiveStatus
+} from "../../database/helpers/userDb";
 import { errorMessages } from "../../types";
 
 export const streamAuthRouter = new Router();

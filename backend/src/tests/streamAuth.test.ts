@@ -2,9 +2,12 @@ import { Server } from "http";
 import request from "supertest";
 import { Connection } from "typeorm";
 import { app } from "../app";
-import { getTestDbConfig } from "../database/initDatabase";
-import { testSetup, testTearDown } from "../testUtils/testSetUpTearDown";
 import { RequestArguments } from "../types";
+import {
+  getTestDbConfig,
+  testSetup,
+  testTearDown
+} from "./testUtils/testSetUpTearDown";
 
 const secretKey = "jedkey";
 

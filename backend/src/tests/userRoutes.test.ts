@@ -2,12 +2,16 @@ import { Server } from "http";
 import request from "supertest";
 import { Connection } from "typeorm";
 import { app } from "../app";
-import { getTestDbConfig } from "../database/initDatabase";
-// import { testData } from "../testUtils/insertTestData";
-import { testSetup, testTearDown } from "../testUtils/testSetUpTearDown";
+import {
+  getTestDbConfig,
+  testSetup,
+  testTearDown
+} from "./testUtils/testSetUpTearDown";
 
 let server: Server;
 let dbConnection: Connection;
+
+const userKeys = ["id", "username", "isLive"];
 
 beforeEach(async done => {
   ({ server, dbConnection } = await testSetup(app, getTestDbConfig()));
@@ -19,9 +23,11 @@ afterEach(async done => {
   done();
 });
 
-it("should return an array of users", async () => {
+it("/users should return an array of users containing id, username and isLive", async () => {
   const response = await request(server).get("/users");
 
   expect(response.status).toBe(200);
-  expect(response.body.channels).toEqual(["test", "hello"]);
+  expect(Object.keys(response.body.channels[0]).sort()).toEqual(
+    userKeys.sort()
+  );
 });

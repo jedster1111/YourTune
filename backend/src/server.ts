@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { app } from "./app";
 import { createDbConnection } from "./database/initDatabase";
-import { insertTestData } from "./testUtils/insertTestData";
+import { insertTestData } from "./tests/testUtils/insertTestData";
 
 dotenv.config();
 

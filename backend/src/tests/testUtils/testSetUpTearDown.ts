@@ -1,8 +1,18 @@
 import { Server } from "http";
 import Koa from "koa";
 import { Connection } from "typeorm";
-import { createDbConnection, TestDbConfig } from "../database/initDatabase";
+import { LoggerOptions } from "typeorm/logger/LoggerOptions";
+import { createDbConnection } from "../../database/initDatabase";
 import { insertTestData } from "./insertTestData";
+
+export interface TestDbConfig {
+  synchronize?: boolean;
+  logging?: LoggerOptions;
+}
+
+export function getTestDbConfig(): TestDbConfig {
+  return { logging: false, synchronize: true };
+}
 
 /**
  * Creates a server, connects to a database and inserts test data.

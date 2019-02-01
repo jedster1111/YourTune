@@ -1,17 +1,8 @@
 import dotenv from "dotenv";
 import "reflect-metadata"; // Needed to get TypeORM working
 import { Connection, createConnection } from "typeorm";
-import { LoggerOptions } from "typeorm/logger/LoggerOptions";
-import { User } from "../entity/User";
-
-export interface TestDbConfig {
-  synchronize?: boolean;
-  logging?: LoggerOptions;
-}
-
-export function getTestDbConfig(): TestDbConfig {
-  return { logging: false, synchronize: true };
-}
+import { TestDbConfig } from "../tests/testUtils/testSetUpTearDown";
+import { User } from "./entity/User";
 
 dotenv.config();
 
@@ -22,10 +13,8 @@ if (!DB_PASSWORD) {
   console.log("No password for postgres db was provided!");
 }
 
-export async function createDbConnection(
-  config?: TestDbConfig
-): Promise<Connection> {
-  return await createConnection({
+export function createDbConnection(config?: TestDbConfig): Promise<Connection> {
+  return createConnection({
     type: "postgres",
     host: DB_HOST || "localhost",
     port: DB_PORT_INT || 3306,

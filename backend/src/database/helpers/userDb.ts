@@ -1,19 +1,26 @@
 import { Repository } from "typeorm";
-import { User } from "./entity/User";
+import { User, UserInitData } from "../entity/User";
 
-export async function getUserById(
+export function getUsers(
+  userRepo: Repository<User>
+): Promise<User[] | undefined> {
+  const users = userRepo.find();
+  return users;
+}
+
+export function getUserById(
   userRepo: Repository<User>,
   id: number
 ): Promise<User | undefined> {
-  const user = await userRepo.findOne({ id });
+  const user = userRepo.findOne({ id });
   return user;
 }
 
-export async function getUserBySecretKey(
+export function getUserBySecretKey(
   userRepo: Repository<User>,
   secretKey: string
 ): Promise<User | undefined> {
-  const user = await userRepo
+  const user = userRepo
     .createQueryBuilder("user")
     .addSelect("user.secretKey", "secretKey")
     .where("user.secretKey = :secretKey", { secretKey })
@@ -22,33 +29,32 @@ export async function getUserBySecretKey(
   return user;
 }
 
-export async function getUserByName(
+export function getUserByName(
   userRepo: Repository<User>,
   username: string
 ): Promise<User | undefined> {
-  const user = await userRepo.findOne({ username });
+  const user = userRepo.findOne({ username });
   return user;
 }
 
-export async function setUserLiveStatus(
+export function setUserLiveStatus(
   userRepo: Repository<User>,
   userId: number,
   newStatus: "Live" | "Offline"
 ) {
   // userData.isLive = newStatus === "Live" ? true : false;
 
-  await userRepo.update(userId, {
+  return userRepo.update(userId, {
     isLive: newStatus === "Live" ? true : false
   });
 }
 
-export async function addUser(
+export function addUser(
   userRepo: Repository<User>,
-  username: string,
-  secretKey: string
+  data: UserInitData
 ): Promise<User> {
-  const user = new User(username, secretKey);
-  const newUser = await userRepo.save(user);
+  const user = new User(data);
+  const newUser = userRepo.save(user);
 
   return newUser;
 }
