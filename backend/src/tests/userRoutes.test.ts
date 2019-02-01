@@ -3,7 +3,6 @@ import request from "supertest";
 import { Connection } from "typeorm";
 import { app } from "../app";
 import { UserInitData } from "../database/entity/User";
-import { getUsers } from "../database/helpers/userDbMethods";
 import { UserGetData } from "../types";
 import { createUserInitData } from "./testUtils/createUserInitData";
 import {
