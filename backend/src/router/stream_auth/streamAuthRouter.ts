@@ -4,7 +4,7 @@ import { User } from "../../database/entity/User";
 import {
   getUserBySecretKey,
   setUserLiveStatus
-} from "../../database/helpers/userDb";
+} from "../../database/helpers/userDbMethods";
 import { errorMessages } from "../../types";
 
 export const streamAuthRouter = new Router();

@@ -8,10 +8,10 @@ dotenv.config();
 const PORT = 8000;
 
 createDbConnection()
-  .then(async connection => {
+  .then(async () => {
     console.log("Connected to database!");
 
-    const users = await insertTestData(connection); // insert some starting data for dev purposes
+    const users = await insertTestData(); // insert some starting data for dev purposes
     console.log("Inserted test data:", users);
 
     app.listen(PORT);

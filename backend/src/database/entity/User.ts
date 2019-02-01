@@ -17,10 +17,10 @@ export class User {
   @Column()
   isLive!: boolean;
 
-  @Column({ select: false })
+  @Column()
   secretKey!: string;
 
-  @Column({ select: false })
+  @Column()
   password!: string;
 
   constructor(data: UserInitData) {

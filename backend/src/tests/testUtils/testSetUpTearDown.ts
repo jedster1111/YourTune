@@ -21,7 +21,7 @@ export function getTestDbConfig(): TestDbConfig {
 export async function testSetup(app: Koa<any, {}>, dbConfig?: TestDbConfig) {
   const server = await startServer(app);
   const dbConnection = await createDbConnection(dbConfig);
-  await insertTestData(dbConnection);
+  await insertTestData();
 
   return { server, dbConnection };
 }

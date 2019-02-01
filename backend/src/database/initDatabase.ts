@@ -9,8 +9,8 @@ dotenv.config();
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 const DB_PORT_INT = DB_PORT ? parseInt(DB_PORT, 10) : undefined; // Workaround for typeorm's port typing
 
-if (!DB_PASSWORD) {
-  console.log("No password for postgres db was provided!");
+if (DB_PASSWORD === undefined) {
+  throw new Error("No password for postgres db was provided!)");
 }
 
 export function createDbConnection(config?: TestDbConfig): Promise<Connection> {
