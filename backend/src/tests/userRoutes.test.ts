@@ -49,3 +49,14 @@ it("should allow me to create a user and returns username, isLive and id", async
   });
   expect(typeof response.body.user.id).toBe("number");
 });
+
+it("If I send wrong data while creating a user, will return 500 error and user wasn't created", async () => {
+  const body = { data: { ...createUserInitData(), fail: "fail" } };
+
+  const response = await request(server)
+    .post("/users")
+    .send(body)
+    .set("Accept", "application/json");
+
+  expect(response.status).toBe(500);
+});
