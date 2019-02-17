@@ -51,7 +51,8 @@ it("should allow me to create a user and returns username, isLive and id", async
 });
 
 it("If I send wrong data while creating a user, will return 500 error and user wasn't created", async () => {
-  const body = { data: { ...createUserInitData(), fail: "fail" } };
+  const body = { data: { ...createUserInitData() } };
+  delete body.data.password;
 
   const response = await request(server)
     .post("/users")

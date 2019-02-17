@@ -13,9 +13,7 @@ export function isUserInitDataValid(data: unknown): data is UserInitData {
         return false;
       }
     }
-    if (Object.keys(data).length !== requiredKeys.length) {
-      return false;
-    }
+
     return true;
   }
   return false;

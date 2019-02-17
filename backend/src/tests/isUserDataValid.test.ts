@@ -11,8 +11,8 @@ it("should return false if data doesn't have all of the required properties", ()
   );
 });
 
-it("should return false if it has the correct properties but extra as well", () => {
+it("should return true if it has the correct properties but extra as well", () => {
   expect(isUserInitDataValid({ ...createUserInitData(), a: "apple" })).toBe(
-    false
+    true
   );
 });
